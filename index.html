@@ -1,0 +1,44 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <title>Page title</title> 
+    <link rel="stylesheet" href="css/style.css"> 
+</head> 
+<body> 
+<button type="button" onclick="playRound()">Play!</button>
+<!-- your content will go there..  --> 
+
+<script>
+    function computerPlay(){
+        let compMove = ['Rock', 'Paper', 'Scissor'];
+        let randomize = Math.floor(Math.random()*compMove.length);
+        let result = compMove[randomize];
+        return result;
+    }
+
+    function playRound(){
+        playerSelection = prompt("Do you choose Rock, Paper, or Scissor?").toString().toLowerCase();
+        computerSelection = computerPlay();
+        console.log(computerSelection.toLowerCase());
+        if (playerSelection == 'rock' && computerSelection == 'Paper'){
+            alert ('You lose! Paper beats Rock!');
+        } else if (playerSelection == 'rock' && computerSelection == 'Scissor'){
+            alert ('You win! Rock beats Scissors!');
+        } else if (playerSelection == 'paper' && computerSelection == 'Rock'){
+            alert ('You win! Paper beats Rock!');
+        } else if (playerSelection == 'paper' && computerSelection == 'Scissor'){
+            alert ('You lose! Scissor beats paper!');
+        } else if (playerSelection == 'scissor' && computerSelection == 'Paper'){
+            alert ('You win! Scissor beats Paper!');
+        } else if (playerSelection == 'scissor' && computerSelection == 'Rock'){
+            alert ('You lose! Rock beats scissor');
+        } else if (playerSelection == computerSelection.toLowerCase()){
+            alert ('Draw!');
+        }else {
+            alert ('Please type either Rock, Paper, or Scissor');
+        }        
+    }
+</script> 
+</body> 
+</html> 
