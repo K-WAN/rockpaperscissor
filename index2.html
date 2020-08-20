@@ -1,0 +1,108 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <title>Page title</title> 
+    <link rel="stylesheet" href="css/style.css"> 
+</head> 
+<body> 
+<h1>Rock Paper Scissor</h1>
+<div id="container"></div>
+<button data-value="rock" type="button">Rock</button>
+<button data-value="paper" type="button">Paper</button>
+<button data-value="scissor" type="button">Scissor</button>
+<!-- your content will go there..  --> 
+
+<script>
+    
+    function computerPlay(){
+        let compMove = ['Rock', 'Paper', 'Scissor'];
+        let randomize = Math.floor(Math.random()*compMove.length);
+        return compMove[randomize];
+    }
+
+    function playRound(scores, playerSelection){        
+        computerSelection = computerPlay();
+        console.log('you : '+playerSelection);
+        console.log('comp : '+computerSelection.toLowerCase());
+        let winText = "Computer uses "+computerSelection+", you win!";
+        let loseText = "Computer uses "+computerSelection+", you lose!"
+        if (playerSelection == 'rock' && computerSelection == 'Paper'){            
+            result.textContent = loseText;
+            result.style.color = 'red';
+            console.log('You lose! Paper beats Rock!');
+            ++scores[1];
+        } else if (playerSelection == 'rock' && computerSelection == 'Scissor'){
+            result.textContent = winText;
+            result.style.color = 'green';
+            console.log('You win! Rock beats Scissors!');
+            ++scores[0];
+        } else if (playerSelection == 'paper' && computerSelection == 'Rock'){
+            result.textContent = winText;
+            result.style.color = 'green';
+            console.log('You win! Paper beats Rock!');
+            ++scores[0];
+        } else if (playerSelection == 'paper' && computerSelection == 'Scissor'){
+            result.textContent = loseText;
+            result.style.color = 'red';
+            console.log('You lose! Scissor beats paper!');
+            ++scores[1];
+        } else if (playerSelection == 'scissor' && computerSelection == 'Paper'){   
+            result.textContent = winText;  
+            result.style.color = 'green';       
+            console.log('You win! Scissor beats Paper!');
+            ++scores[0];
+        } else if (playerSelection == 'scissor' && computerSelection == 'Rock'){
+            result.textContent = loseText;
+            result.style.color = 'red';
+            console.log('You lose! Rock beats scissor');
+            ++scores[1];
+        } else if (playerSelection == computerSelection.toLowerCase()){
+            result.textContent = "Draw!";
+            result.style.color = 'blue';
+            console.log('Draw!');
+        }
+        return scores;        
+    }
+
+    function game(){
+        if (final.textContent!==""){
+            final.textContent="";
+        }
+        let counter = 5;
+        playRound(scores, this.dataset.value);
+        console.log("Player ="+scores[0]);
+        console.log("COM ="+scores[1]);
+        p1.textContent = 'Your score : '+ scores[0];
+        p2.textContent = 'Comp score : '+ scores[1];
+        if (scores[0]+scores[1]==5){
+            if (scores[0] > scores[1]){
+                scores[0] = 0;
+                scores[1] = 0;                
+                final.textContent = "Congratulations, you win!";
+                final.style.color = 'gold';                
+            } else {
+                scores[0] = 0;
+                scores[1] = 0;
+                final.textContent = "Too bad, you lose!";
+                final.style.color = 'black';
+            }            
+        }
+    }
+
+    let scores = [0,0];
+    let buttons = document.querySelectorAll('button');
+    buttons.forEach(button => button.addEventListener('click', game));
+
+    let container = document.getElementById('container');
+    let p1 = document.createElement('p');    
+    let p2 = document.createElement('p');    
+    let result = document.createElement('h2');
+
+    let final = document.createElement('h2');
+    final.style.textAlign = 'center';
+
+    container.append(final, result, p1, p2);
+</script> 
+</body> 
+</html> 
